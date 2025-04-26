@@ -108,35 +108,30 @@ a:hover {
     color: #333;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .cards .card {
-  filter: none; /* Ensure cards are not blurry by default */
-  transform: scale(1); /* Ensure cards are not scaled by default */
-  transition: filter 0.3s, transform 0.3s; /* Smooth transition for hover effects */
-}
-
-.cards .card:hover {
-  transform: scale(1.1, 1.1); /* Scale the hovered card */
-  z-index: 1; /* Bring the hovered card to the front */
-}
-
-/* Blur cards that come after the hovered card */
-.cards .card:hover ~ .card {
-  filter: blur(5px); /* Blur sibling cards */
-  transform: scale(0.95); /* Slightly shrink sibling cards */
-}
-
-/* Blur cards that come before the hovered card */
-.cards:hover .card:not(:hover) {
-  filter: blur(5px); /* Blur sibling cards */
-  transform: scale(0.95); /* Slightly shrink sibling cards */
-}
-
-/* Reset blur when not hovering over any card */
-.cards:hover .card:not(:hover) {
-  filter: none; /* Remove blur when no card is hovered */
-  transform: scale(1); /* Reset scale when no card is hovered */
-}
+    filter: none; /* Ensure cards are not blurry by default */
+    transform: scale(1); /* Ensure cards are not scaled by default */
+    transition: filter 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+  }
+  
+  .cards .card:hover {
+    transform: scale(1.1, 1.1); /* Scale the hovered card */
+    z-index: 1; /* Bring the hovered card to the front */
+  }
+  
+  /* Blur sibling cards (both before and after the hovered card) */
+  .cards .card:hover ~ .card, /* Cards after the hovered card */
+  .cards .card:hover + .card, /* Cards before the hovered card */
+  .cards .card:not(:hover) {
+    filter: blur(5px); /* Blur sibling cards */
+    transform: scale(0.95); /* Slightly shrink sibling cards */
+  }
+  
+  /* Reset blur when not hovering over any card */
+  .cards:not(:hover) .card {
+    filter: none; /* Remove blur when no card is hovered */
+    transform: scale(1); /* Reset scale when no card is hovered */
+  }
 
 /* Card Content */
 .cards .card h3 {
