@@ -59,8 +59,11 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* Align cards to the top */
+    justify-content: center; /* Center the cards horizontally */
+    padding: 0; /* Remove extra padding */
+    margin: 0 auto; /* Center the container */
+    max-width: 1200px; /* Optional: Limit the container width */
 }
 
 /* Card Colors */
