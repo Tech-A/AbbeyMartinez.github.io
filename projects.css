@@ -190,7 +190,7 @@ a:hover {
 }
 
 .cards .card img.Runlockimg {
-    min-width: 2px;
+    min-width: 120px;
     overflow: hidden;
     max-height: 200px;
 }
