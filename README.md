@@ -1,7 +1,7 @@
 # Abbey Portfolio
 
-A mixed-media scrapbook portfolio on one long scrolling page. Visitors connect
-the dots into a heart to get in. React + TypeScript + Vite.
+A mixed-media scrapbook portfolio on one long scrolling page.
+React + TypeScript + Vite.
 
 ## Run it
 
@@ -14,8 +14,6 @@ npm run preview  # preview the production build
 
 ## How the page works
 
-1. **Gate** (`ConnectDots.tsx`) — draw the heart to get in. Remembered for the
-   browser session.
 2. **Hero + scrapbook starfield** (`Hero.tsx`, `Scrapbook.tsx`) — real photo
    cutouts scattered like stars around the title and on down the page. Each
    is nudged to the nearest free spot so it never covers text, windows or the

@@ -30,7 +30,7 @@ export default function Contact() {
       </div>
 
       <footer className="foot" data-avoid>
-        © {new Date().getFullYear()} abbey <i>/</i> designed &amp; built from scratch <i>/</i>{" "}
+        © {new Date().getFullYear()} abbey <i>/</i>{" "}
         <a href="#home" className="foot__top">back to the top ↑</a>
       </footer>
     </section>

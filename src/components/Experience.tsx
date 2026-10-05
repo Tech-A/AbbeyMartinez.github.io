@@ -3,11 +3,12 @@ import { timeline, stack } from "../data/site";
 import "./experience.css";
 
 // where each tool sits inside the open case, and where it lands when the
-// case is hovered: a loose scatter in rows above and beside the case.
+// case is hovered: they pop straight up out of the box into three loose,
+// overlapping rows over the open case — a short hop, everything readable.
 // Positions are % of the case width.
 const SPREAD: [number, number, number][] = [
-  [-8, 14, -6],  [8, -14, 4],   [37, -26, -3], [70, -20, 6], [102, -4, -5],
-  [112, 34, 5],  [-12, 50, -4], [114, 70, 6],  [-10, 86, 4], [44, 40, -4],
+  [4, 38, -7],   [14, 10, 5],   [46, 4, -3],   [81, 12, 6],   [34, 36, 4],
+  [64, 40, -5],  [97, 40, 7],   [19, 64, -4],  [52, 66, 3],   [83, 64, -6],
 ];
 const spots = stack.map((_, i) => {
   const back = i % 2 === 0;                       // two loose rows in the base
