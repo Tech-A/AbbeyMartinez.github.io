@@ -1,0 +1,38 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; }
+body {
+  font-family: var(--font-body);
+  color: var(--onyx);
+  background: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+html { scroll-behavior: smooth; }
+
+/* pill buttons (nav, links) */
+.pill {
+  display: inline-block;
+  padding: 0.18rem 1.5rem 0.22rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: rgba(251, 249, 243, 0.85);
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+  color: var(--ink);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.pill:hover { background: var(--pill); transform: translateY(-1px) rotate(-1deg); }
+.pill--active { background: var(--pill); border-color: transparent; }
+
+/* textured paper page — use on any full-bleed surface */
+.paper-bg {
+  background-color: var(--paper);
+  background-image: var(--paper-texture);
+  background-blend-mode: multiply;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  /* entrance animations start hidden — show them without the motion */
+  .nav--in, .hero--in .hero__text > *, .hero--in .hero__name, .hero--in .hero__tag, .hero--in .hero__scroll, .sb--in .sb__pop { opacity: 1 !important; }
+}

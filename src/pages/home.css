@@ -1,0 +1,20 @@
+/* one long sheet of paper: cream at the top, fading into
+   sky blue, then dusk by the time you reach the contact note */
+.page {
+  position: relative;
+  min-height: 100%;
+  background-color: #fff; /* texture multiplies onto the gradient only */
+  background-image:
+    var(--paper-texture),
+    linear-gradient(180deg,
+      #F2EEE6 0%,
+      #F2EEE6 18%,
+      #E6E8E2 28%,
+      #D3E1E8 44%,
+      #BACFDE 62%,
+      #93A9C4 80%,
+      #5E6F92 100%);
+  background-blend-mode: multiply;
+  overflow-x: clip;
+}
+

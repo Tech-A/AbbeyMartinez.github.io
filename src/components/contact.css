@@ -1,0 +1,79 @@
+/* ============================================================
+   CONTACT — a real lined-paper cutout; text is set on its
+   ruled lines (measured from the image: lines every 5.32% of
+   the width; text starts on the second line).
+   ============================================================ */
+
+.contact {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: clamp(6rem, 14vh, 9rem) 1.5rem 2rem;
+  overflow: hidden;
+}
+
+.note-card {
+  position: relative; z-index: 1;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  aspect-ratio: 707 / 733;
+  container-type: inline-size;
+  rotate: -1.5deg;
+}
+.note-card__paper {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  filter: drop-shadow(0 2px 2px rgba(40, 30, 20, 0.2)) drop-shadow(0 16px 26px rgba(40, 30, 20, 0.16));
+}
+.note-card__paper { z-index: 1; }
+.note-card__snoopy {
+  position: absolute; z-index: 0;
+  left: 80%; top: 34%; width: 25%;
+  rotate: 3deg;
+  filter: drop-shadow(0 4px 8px rgba(40, 30, 20, 0.15));
+  transition: translate 0.5s cubic-bezier(0.3, 1.5, 0.5, 1), rotate 0.5s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+/* hover the note: snoopy pops out from behind it */
+.note-card:hover .note-card__snoopy { translate: 62% -6%; rotate: 12deg; }
+
+.note-card__lines {
+  position: absolute; z-index: 1;
+  left: 25%; right: 6%;
+  top: 24.9cqw;
+  color: #33407a;
+  font-family: var(--font-hand); font-weight: 500;
+}
+.note-card__row {
+  height: 5.32cqw;
+  margin: 0;
+  display: flex; align-items: flex-end; gap: 2cqw;
+  padding-bottom: 0.5cqw;
+  font-size: 3.9cqw; line-height: 1;
+  white-space: nowrap;
+}
+.note-card__row--head { font-size: 6cqw; font-weight: 700; color: var(--ink); }
+.note-card__row--sign { justify-content: flex-end; padding-right: 4cqw; font-size: 4.6cqw; }
+.note-card__label {
+  display: inline-block; min-width: 19cqw;
+  font-family: var(--font-type); font-size: 2.5cqw; letter-spacing: 0.04em;
+  color: var(--dim-grey); text-transform: uppercase;
+  padding-bottom: 0.4cqw;
+}
+.note-card__row a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.note-card__row a:hover { color: var(--coral); }
+
+.foot__top { color: inherit; text-underline-offset: 3px; }
+.foot__top:hover { color: #fff; }
+.foot i { font-style: normal; opacity: 0.5; margin: 0 0.5em; }
+.foot {
+  position: relative; z-index: 1;
+  margin-top: clamp(4rem, 10vh, 6rem);
+  text-align: center;
+  font-family: var(--font-type); font-size: 0.68rem;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(251, 249, 243, 0.85);
+}
+
+@media (max-width: 640px) {
+  .note-card__snoopy { left: 78%; top: 26%; width: 19%; }
+  .note-card:hover .note-card__snoopy, .note-card:active .note-card__snoopy { translate: 45% -6%; }
+}

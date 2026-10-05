@@ -1,0 +1,155 @@
+/* ============================================================
+   CONNECT THE DOTS  — heart discovery intro
+   ============================================================ */
+
+.cd {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.8rem;
+  transition: opacity 0.65s ease;
+}
+.cd--exit { opacity: 0; pointer-events: none; }
+
+/* ── paper card the dots sit on ─────────────────────────────── */
+.cd__card {
+  position: relative;
+  padding: clamp(1rem, 4vw, 2rem);
+  background: var(--paper-hi);
+  transform: rotate(-1.2deg);
+  box-shadow: 0 1px 2px rgba(40, 30, 20, 0.18), 0 14px 30px rgba(40, 30, 20, 0.10);
+}
+.cd__tape {
+  position: absolute; width: 5.5rem; height: 1.6rem;
+  background: rgba(214, 203, 176, 0.75);
+  clip-path: polygon(0 8%, 6% 0, 12% 10%, 18% 0, 82% 0, 88% 10%, 94% 0, 100% 8%,
+                     100% 92%, 94% 100%, 88% 90%, 82% 100%, 18% 100%, 12% 90%, 6% 100%, 0 92%);
+}
+.cd__tape--a { top: -0.7rem; left: -1.6rem; transform: rotate(-32deg); }
+.cd__tape--b { bottom: -0.6rem; right: -1.5rem; transform: rotate(-28deg); background: rgba(196, 209, 214, 0.78); }
+
+/* ── SVG canvas ─────────────────────────────────────────────── */
+.cd__svg {
+  display: block;
+  width: min(76vw, 420px);
+  height: auto;
+  overflow: visible;
+  cursor: crosshair;
+}
+
+/* ── hint label ─────────────────────────────────────────────── */
+.cd__hint {
+  font-family: var(--font-type);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim-grey);
+  opacity: 0;
+  margin: 0;
+  user-select: none;
+  animation: cd-hintIn 0.8s ease 0.6s forwards;
+}
+.cd__hint--done { color: var(--coral); }
+@keyframes cd-hintIn {
+  to { opacity: 0.85; }
+}
+
+/* ── dots ───────────────────────────────────────────────────── */
+.cd__dot {
+  fill: var(--ink);
+  transition: fill 0.18s ease, opacity 0.35s ease;
+  transform-origin: center;
+  transform-box: fill-box;
+  pointer-events: none;
+}
+
+/* being dragged from */
+.cd__dot--active {
+  fill: var(--coral);
+  animation: cd-dotPulse 0.6s ease-in-out infinite;
+}
+
+/* wrong tap — flash coral then fade back */
+.cd__dot--wrong {
+  fill: var(--coral);
+  animation: cd-dotWrong 0.5s ease forwards;
+}
+
+/* fade out when heart is complete */
+.cd__dot--done {
+  opacity: 0;
+  transition: opacity 0.4s ease 0.2s;
+}
+
+/* shake all dots on reset */
+.cd--resetting .cd__dot {
+  animation: cd-shake 0.45s ease;
+}
+
+@keyframes cd-dotPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.55); }
+}
+@keyframes cd-dotWrong {
+  0%   { transform: scale(1.8); opacity: 1; }
+  100% { transform: scale(1);   opacity: 0.5; }
+}
+@keyframes cd-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-5px); }
+  40%      { transform: translateX(5px); }
+  60%      { transform: translateX(-3px); }
+  80%      { transform: translateX(3px); }
+}
+
+/* ── connected line segments ────────────────────────────────── */
+.cd__seg {
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: cd-draw 0.22s ease-out forwards;
+  transition: stroke 0.3s ease;
+}
+/* heart complete — lines turn coral */
+.cd__seg--done { stroke: var(--coral); }
+
+@keyframes cd-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* fade segments when resetting */
+.cd__segs--reset .cd__seg {
+  animation: cd-segFade 0.4s ease forwards;
+}
+@keyframes cd-segFade {
+  to { opacity: 0; }
+}
+
+/* ── rubber-band drag line ──────────────────────────────────── */
+.cd__band {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 5 5;
+  fill: none;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ── heart polygon fill on completion ───────────────────────── */
+.cd__heart-fill {
+  fill: var(--coral);
+  stroke: none;
+  opacity: 0;
+  animation: cd-fillIn 0.55s ease 0.05s forwards;
+}
+@keyframes cd-fillIn {
+  to { opacity: 0.14; }
+}

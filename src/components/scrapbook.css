@@ -1,0 +1,51 @@
+/* ============================================================
+   SCRAPBOOK STARFIELD — placement + the orbit ring are driven
+   from Scrapbook.tsx (it writes each piece's position/transform);
+   CSS only handles size, the pop-in, and the hover nudge.
+   ============================================================ */
+
+.sb {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  /* one starfield unit — tracks the viewport, capped both ways */
+  --u: clamp(6px, 0.82vw, 12px);
+}
+.sb__piece {
+  position: absolute;
+  width: calc(var(--w) * var(--u));
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.sb__piece img { display: block; width: 100%; height: auto; user-select: none; }
+
+/* cut-out paper shadow + pop-in, like a star switching on */
+.sb__pop {
+  position: relative;
+  filter:
+    drop-shadow(0 1px 1px rgba(30, 25, 20, 0.22))
+    drop-shadow(0 8px 14px rgba(30, 25, 20, 0.14));
+  opacity: 0;
+}
+.sb--in .sb__pop {
+  animation: sb-pop 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) calc(0.3s + var(--i) * 55ms) forwards;
+}
+@keyframes sb-pop {
+  from { opacity: 0; transform: scale(0.2) rotate(-25deg); }
+  50%  { opacity: 1; }
+  to   { opacity: 1; transform: none; }
+}
+
+/* a small lift + tilt when you hover a resting piece */
+.sb:not(.sb--orbit) .sb__piece { pointer-events: auto; }
+.sb__float { transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.sb__piece:hover .sb__float { transform: translateY(-6px) rotate(4deg) scale(1.06); }
+
+/* the camera's cut-out screen: dark glass with a soft reflection */
+.sb__screen {
+  position: absolute;
+  left: 8.8%; top: 22.6%; width: 57%; height: 66%;
+  background:
+    linear-gradient(125deg, transparent 40%, rgba(255, 255, 255, 0.14) 46%, transparent 58%),
+    linear-gradient(160deg, #2b3340, #161b23);
+}
+.sb__screen + img { position: relative; }

@@ -1,0 +1,116 @@
+/* ============================================================
+   HERO — title floating in a scrapbook starfield
+   ============================================================ */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  display: grid; place-items: center;
+  color: var(--ink);
+}
+
+.hero__text {
+  position: relative; z-index: 5;
+  max-width: min(100%, 60rem);
+  padding: 4rem 1rem 0;
+  text-align: center;
+}
+.hero__eyebrow {
+  margin: 0 0 1.4rem;
+  font-family: var(--font-type); font-size: 0.72rem;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--dim-grey);
+}
+.hero__eyebrow i { font-style: normal; opacity: 0.5; margin: 0 0.4em; }
+.hero__name {
+  display: inline-block;
+  margin: 0;
+  padding: 0 0.15em;
+  font-family: var(--font-serif); font-weight: 400;
+  font-size: clamp(5rem, 15vw, 11rem);
+  line-height: 0.85; letter-spacing: -0.025em;
+  cursor: default;
+  transition: letter-spacing 0.8s cubic-bezier(0.3, 1.2, 0.5, 1);
+}
+.hero__name:hover { letter-spacing: 0.01em; }
+.hero__role {
+  margin: 0.9rem 0 0;
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+}
+.hero__blurb {
+  margin: 1rem auto 0;
+  max-width: 25rem;
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 0.92rem; line-height: 1.6;
+  color: #4b4945;
+}
+
+/* while the ring orbits, everything but the name steps back */
+.hero__eyebrow, .hero__role, .hero__blurb { transition: opacity 0.6s ease, filter 0.6s ease; }
+.hero--orbit .hero__eyebrow, .hero--orbit .hero__role, .hero--orbit .hero__blurb {
+  opacity: 0.15 !important; filter: blur(1px);
+}
+
+/* label-tape nudge beside the name */
+.hero__name-wrap { position: relative; display: inline-block; }
+.hero__tag {
+  position: absolute; left: 100%; top: 8%; z-index: 7;
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  margin-left: 0.4rem;
+  pointer-events: none;
+  rotate: -4deg;
+  transition: opacity 0.4s ease;
+}
+.hero--orbit .hero__tag { opacity: 0 !important; }
+.hero__circled {
+  position: relative;
+  padding: 0.7rem 1.2rem;
+  font-family: var(--font-type); font-weight: 700; font-size: 1rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim-grey);
+  white-space: nowrap;
+}
+.hero__ring {
+  position: absolute; inset: -0.2rem -0.5rem; width: calc(100% + 1rem); height: calc(100% + 0.4rem);
+  fill: none; stroke: var(--dim-grey); stroke-width: 2; stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  overflow: visible;
+}
+.hero__arrow {
+  width: 2.6rem;
+  fill: none; stroke: var(--dim-grey); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+.hero__hint-touch { display: none; }
+@media (hover: none) {
+  .hero__hint-mouse { display: none; }
+  .hero__hint-touch { display: inline; }
+}
+
+/* scroll cue */
+.hero__scroll {
+  position: absolute; left: 50%; bottom: 1.6rem; z-index: 5;
+  translate: -50% 0;
+  font-family: var(--font-type); font-size: 0.7rem;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--dim-grey); text-decoration: none;
+}
+.hero__scroll span { display: inline-block; margin-left: 0.4em; animation: nudge 1.8s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateY(4px); } }
+
+/* ---------- ENTRANCE (after the dots gate) ---------- */
+.hero__eyebrow, .hero__name, .hero__role, .hero__blurb, .hero__tag, .hero__scroll { opacity: 0; }
+.hero--in .hero__eyebrow { animation: rise 0.7s ease-out 0.1s forwards; }
+.hero--in .hero__name    { animation: rise 0.9s ease-out 0.2s forwards; }
+.hero--in .hero__role    { animation: rise 0.7s ease-out 0.5s forwards; }
+.hero--in .hero__blurb   { animation: rise 0.7s ease-out 0.6s forwards; }
+.hero--in .hero__tag     { animation: fadeHint 0.8s ease-out 1.4s forwards; }
+@keyframes fadeHint { to { opacity: 0.55; } }
+.hero--in .hero__scroll  { animation: rise 0.7s ease-out 1.2s forwards; }
+.hero--in 
+@media (max-width: 640px) {
+  .hero__blurb { font-size: 0.86rem; }
+  .hero__tag { left: auto; right: -1rem; top: -2.8rem; margin: 0; }
+  .hero__circled { font-size: 0.66rem; padding: 0.45rem 0.8rem; }
+  .hero__arrow { display: none; }
+}
