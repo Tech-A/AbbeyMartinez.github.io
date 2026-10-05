@@ -11,7 +11,7 @@ import "./home.css";
 // once the heart is drawn, skip the gate for the rest of the browser session
 const KEY = "dots-solved";
 function alreadySolved() {
-  if (location.search.includes("skip")) return true; try { return sessionStorage.getItem(KEY) === "1"; } catch { return false; }
+  try { return sessionStorage.getItem(KEY) === "1"; } catch { return false; }
 }
 
 export default function Home() {

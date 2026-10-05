@@ -107,10 +107,10 @@
 .hero--in .hero__tag     { animation: fadeHint 0.8s ease-out 1.4s forwards; }
 @keyframes fadeHint { to { opacity: 0.55; } }
 .hero--in .hero__scroll  { animation: rise 0.7s ease-out 1.2s forwards; }
-.hero--in 
+
 @media (max-width: 640px) {
   .hero__blurb { font-size: 0.86rem; }
-  .hero__tag { left: auto; right: -1rem; top: -2.8rem; margin: 0; }
-  .hero__circled { font-size: 0.66rem; padding: 0.45rem 0.8rem; }
+  .hero__tag { top: 32%; margin-left: 0.1rem; rotate: -8deg; }
+  .hero__circled { font-size: 0.6rem; padding: 0.4rem 0.7rem; letter-spacing: 0.12em; }
   .hero__arrow { display: none; }
 }
